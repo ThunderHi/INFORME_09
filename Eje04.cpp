@@ -39,7 +39,7 @@ public:
     }
 
     void usarHabilidadEspecial() override {
-        cout<<"El mago usa su habilidad especial: 'Lluvia de estrellada de meteoros'."<<endl;
+        cout<<"El mago usa su habilidad especial: 'Lluvia estrellada de meteoros'."<<endl;
     }
 };
 
