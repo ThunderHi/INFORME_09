@@ -5,7 +5,7 @@ using namespace std;
 // Clase base Figura
 class Figura {
 public:
-    virtual double calcularArea() const = 0; // Metodo virtual puro calcularArea
+    virtual double calcularArea() = 0; // Metodo virtual puro calcularArea
     virtual ~Figura() {} // Destructor virtual
 };
 // Clase derivada Circulo
@@ -14,7 +14,7 @@ private:
     double radio;
 public:
     Circulo(double r) : radio(r) {}
-    double calcularArea() const override {
+    double calcularArea() override {
         return 3.1416*radio*radio;
     }
 };
@@ -25,7 +25,7 @@ private:
     double ancho, alto;
 public:
     Rectangulo(double a, double b) : ancho(a), alto(b) {}
-    double calcularArea() const override {
+    double calcularArea() override {
         return ancho * alto;
     }
 };
@@ -36,13 +36,13 @@ private:
     double base, altura;
 public:
     Triangulo(double b, double h) : base(b), altura(h) {}
-    double calcularArea() const override {
+    double calcularArea() override {
         return 0.5 * base * altura;
     }
 };
 
 int main() {
-    // Crear objetos de diferentes tipos de figuras
+    // Crear objetos de diferentes tipos de figuras e incluirlos al arreglo dinamico figuras
     Figura* figuras[3];
     figuras[0]=new Circulo(5.0);
     figuras[1]=new Rectangulo(4.0,6.0);
@@ -50,7 +50,7 @@ int main() {
 
     // Recorrer el arreglo y llamar a calcularArea() para cada objeto
     for (int i = 0; i < 3; ++i) {
-        cout <<"El área de la figura es: "<<figuras[i]->calcularArea()<<endl;
+        cout <<"El área de la figura es: "<<figuras[i]->calcularArea()<<endl; //El operador -> se utiliza porque figuras[i] es un puntero
     }
 
     // Liberar memoria
