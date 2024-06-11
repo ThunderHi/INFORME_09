@@ -50,7 +50,7 @@ int main() {
 
     // Recorrer el arreglo y llamar a calcularArea() para cada objeto
     for (int i = 0; i < 3; ++i) {
-        cout <<"El área de la figura es: "<<figuras[i]->calcularArea()<<endl; //El operador -> se utiliza porque figuras[i] es un puntero
+        cout <<"El area de la figura es: "<<figuras[i]->calcularArea()<<endl; //El operador -> se utiliza porque figuras[i] es un puntero
     }
 
     // Liberar memoria
