@@ -14,13 +14,12 @@ class Empleado : public Interfaz {
         string nombre;
         double salarioBase;     //salario base acorde a su rol
         string fechaContratacion;
-        string tipoContrato;    //Tiempo completo, medio tiempo, por horas
         static double tarifaHora; // Atributo estático
 
     public:
         //Constructor de clase base
-        Empleado(string nom, double salario, string fecha, string tipo): 
-        nombre(nom), salarioBase(salario), fechaContratacion(fecha), tipoContrato(tipo) {}
+        Empleado(string nom, double salario, string fecha): 
+        nombre(nom), salarioBase(salario), fechaContratacion(fecha){}
 
         virtual double calcularSalario() const = 0; // Método virtual puro
 
@@ -34,7 +33,6 @@ class Empleado : public Interfaz {
             cout << "Nombre: " << nombre << endl;
             cout << "Salario Base: " << salarioBase << endl;
             cout << "Fecha de Contratacion: " << fechaContratacion << endl;
-            cout << "Tipo de Contrato: " << tipoContrato << endl;
         }
         virtual ~Empleado() {} // Destructor virtual
 };
@@ -46,11 +44,10 @@ double Empleado::tarifaHora = 0.0;
 class Gerente : public Empleado {
     private:
         double bono;    //Adicional a su sueldo
-
     public:
         //Constructor de clase Gerente
-        Gerente(string nom, double salario, string fecha, string tipo, double b):
-        Empleado(nom, salario, fecha, tipo), bono(b) {}
+        Gerente(string nom, double salario, string fecha, double b):
+        Empleado(nom, salario, fecha), bono(b) {}
 
         //Sobreescritura de método
         double calcularSalario() const override {
@@ -70,8 +67,8 @@ class Desarrollador : public Empleado {
         int horasExtras;    //Hora fuera de horario normal
     public:
         //Constructor de clase Desarrollador
-        Desarrollador(string nom, double salario, string fecha, string tipo, int horas):
-        Empleado(nom, salario, fecha, tipo), horasExtras(horas) {}
+        Desarrollador(string nom, double salario, string fecha, int horas):
+        Empleado(nom, salario, fecha), horasExtras(horas) {}
 
         //Sobreescritura de método
         double calcularSalario() const override {
@@ -93,8 +90,8 @@ class Disenador : public Empleado {
 
     public:
         //Constructor de Diseñador
-        Disenador(string nom, double salario, string fecha, string tipo, double comision, double ventas):
-        Empleado(nom, salario, fecha, tipo), porcentajeComision(comision), ventasTotales(ventas) {}
+        Disenador(string nom, double salario, string fecha, double comision, double ventas):
+        Empleado(nom, salario, fecha), porcentajeComision(comision), ventasTotales(ventas) {}
 
         //Sobreescritura de método
         double calcularSalario() const override {   
@@ -124,7 +121,7 @@ int main() {
 
     // Crear diferentes tipos de empleados
     for(int i = 0; i < numEmpleados; i++){
-        string nombre, fechaContrato, contrato;
+        string nombre, fechaContrato;
         double sueldoBase;
         int opcion;
         cout<<"Tipo de empleado a ingresar (1-Gerente, 2-Desarrollador, 3-Disenador)"<<endl;
@@ -135,36 +132,30 @@ int main() {
             cin>>nombre;
             cout<<"Fecha de contrato?: "<<endl;
             cin>>fechaContrato;
-            cout<<"Tipo de contrato?(completo, medio, horas):: "<<endl;
-            cin>>contrato;
             cout<<"Sueldo base?: "<<endl;
             cin>>sueldoBase;
             double bono;
             cout<<"Ingrese el bono en soles para nuestro gerente: "<<endl;
             cin>>bono;
-            empleados[i] = new Gerente(nombre, sueldoBase, fechaContrato, contrato, bono);
+            empleados[i] = new Gerente(nombre, sueldoBase, fechaContrato, bono);
             break;
         case 2: //Ingreso de datos para Desarrollador
             cout<<"Nombre?: "<<endl;
             cin>>nombre;
             cout<<"Fecha de contrato?: "<<endl;
             cin>>fechaContrato;
-            cout<<"Tipo de contrato?(completo, medio, horas):: "<<endl;
-            cin>>contrato;
             cout<<"Sueldo base?: "<<endl;
             cin>>sueldoBase;
             int hora;
             cout<<"Ingrese horas extras trabajadas: "<<endl;
             cin>>hora;
-            empleados[i] = new Desarrollador(nombre, sueldoBase, fechaContrato, contrato, hora);
+            empleados[i] = new Desarrollador(nombre, sueldoBase, fechaContrato, hora);
             break;
         case 3: //  Ingreso de datos para Diseñador
             cout<<"Nombre?: "<<endl;
             cin>>nombre;
             cout<<"Fecha de contrato?: "<<endl;
             cin>>fechaContrato;
-            cout<<"Tipo de contrato?(completo, medio, horas): "<<endl;
-            cin>>contrato;
             cout<<"Sueldo base?: "<<endl;
             cin>>sueldoBase;
             double comision, venta;
@@ -172,7 +163,7 @@ int main() {
             cin>>comision;
             cout<<"Ingrese ventas en soles realizadas: "<<endl;
             cin>>venta;
-            empleados[i] = new Disenador(nombre, sueldoBase, fechaContrato, contrato, comision, venta);
+            empleados[i] = new Disenador(nombre, sueldoBase, fechaContrato, comision, venta);
             break;        
         default:
             cout<<"opcion no valida, vuelva a ingresar"<<endl;
@@ -192,6 +183,5 @@ int main() {
     for (int i = 0; i < numEmpleados; ++i) {
         delete empleados[i];
     }
-
     return 0;
 }
