@@ -43,7 +43,7 @@ public:
 
 int main() {
     // Crear objetos de diferentes tipos de figuras e incluirlos al arreglo dinamico figuras
-    Figura* figuras[3];
+    Figura* figuras[3];      //Arreglo de punteros
     figuras[0]=new Circulo(5.0);
     figuras[1]=new Rectangulo(4.0,6.0);
     figuras[2]=new Triangulo(4.0,3.0);
