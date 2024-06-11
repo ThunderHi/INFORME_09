@@ -34,7 +34,7 @@ class Rectangulo : public Figura {
 private:
     double ancho, alto;
 public:
-    Rectangulo(int a, int b) : ancho(a),alto(b) {}
+    Rectangulo(double a, double b) : ancho(a),alto(b) {}
     double calcularArea() override {
         return ancho*alto;
     }
@@ -51,9 +51,9 @@ public:
 // Clase derivada Triangulo
 class Triangulo : public Figura {
 private:
-    int base, altura;
+    double base, altura;
 public:
-    Triangulo(int b, int h) : base(b),altura(h) {}
+    Triangulo(double b, double h) : base(b),altura(h) {}
     double calcularArea() override {
         return 0.5*base*altura;
     }
@@ -69,18 +69,58 @@ public:
 
 int main() {
     // Crear objetos de diferentes tipos de figuras e incluirlos al arreglo dinamico figuras
-    Figura* figuras[3];      //Arreglo de punteros
+    Figura* figuras[4];      //Arreglo de punteros
     figuras[0]=new Circulo(5.0);
-    figuras[1]=new Rectangulo(4.0,6.0);
+    figuras[1]=new Rectangulo(4,6);
     figuras[2]=new Triangulo(4.0,3.0);
 
+    int opc;
+    //Menu sencillo para elegir la figura
+    cout<<"Ingrese la figura que desee: "<<endl;
+    cout<<"1) Circulo"<<endl;
+    cout<<"2) Rectangulo"<<endl;
+    cout<<"3) Triangulo"<<endl;
+    cin>>opc;
+
+    //Switch que añade al arreglo los datos de la figura elegida
+    switch (opc)
+    {
+    case 1:
+        double rad;
+        cout<<"Ingrese el radio del circulo: ";
+        cin>>rad;
+        figuras[3]= new Circulo(rad);
+        break;
+    case 2:
+        double ancho;
+        double alto;
+        cout<<"Ingrese el ancho del rectangulo: "<<endl;
+        cin>>ancho;
+        cout<<"Ingrese el alto del rectangulo: "<<endl;
+        cin>>alto;
+        figuras[3]= new Rectangulo(ancho,alto);
+        break;
+    case 3:
+        double base;
+        double altura;
+        cout<<"Ingrese la base del triangulo: "<<endl;
+        cin>>base;
+        cout<<"Ingrese la altura del triangulo: "<<endl;
+        cin>>altura;
+        figuras[3]= new Triangulo(base,altura);
+        break;
+    default:
+        break;
+    }
+
+
     // Recorrer el arreglo y llamar a calcularArea() para cada objeto
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 4; ++i) {
         figuras[i]->mostrarinfo(); //El operador -> se utiliza porque figuras[i] es un puntero
     }
 
     // Liberar memoria
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 4; ++i) {
         delete figuras[i];
     }
     return 0;
