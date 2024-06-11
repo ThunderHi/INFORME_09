@@ -113,7 +113,7 @@ int main() {
         break;
     }
 
-
+    // El metodo mostrarinfo() muestra los datos de la figura, su area y su perimetro 
     // Recorrer el arreglo y llamar a calcularArea() para cada objeto
     for (int i = 0; i < 4; ++i) {
         figuras[i]->mostrarinfo(); //El operador -> se utiliza porque figuras[i] es un puntero
